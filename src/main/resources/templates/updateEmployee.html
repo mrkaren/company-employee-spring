@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+Update Employee <br>
+<form method="post" action="/employees/update" enctype="multipart/form-data">
+    <input type="hidden" th:value="${employee.id}" name="id">
+    Name: <input type="text" name="name" th:value="${employee.name}"> <br>
+    surname: <input type="text" name="surname" th:value="${employee.surname}"> <br>
+    email: <input type="text" name="email" th:value="${employee.email}"> <br>
+    company: <select name="company.id">
+    <option  th:each="company : ${companies}" th:text="${company.name}" th:value="${company.id}" th:selected="${employee.company.id == company.id}"></option>
+        </select> <br>
+    <input type="file" name="picture">
+    <input type="submit" value="Add">
+</form>
+
+<img th:if="${employee.getPicName() != null}" th:src="@{/getImage(picName=${employee.picName})}" width="40" />
+<a th:if="${employee.getPicName() != null}" th:href="@{/employees/image/delete(id=${employee.id})}">delete picture</a>
+
+</body>
+</html>
