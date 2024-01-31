@@ -5,6 +5,8 @@
     <title>Update</title>
 </head>
 <body>
+<th:block th:include="/fragment/headerFragment::userInfo" />
+
 Update Employee <br>
 <form method="post" action="/employees/update" enctype="multipart/form-data">
     <input type="hidden" th:value="${employee.id}" name="id">

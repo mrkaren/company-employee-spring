@@ -3,8 +3,10 @@ package org.example.companyemployee.controller;
 import org.example.companyemployee.entity.Employee;
 import org.example.companyemployee.repository.CompanyRepository;
 import org.example.companyemployee.repository.EmployeeRepository;
+import org.example.companyemployee.security.SpringUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +61,7 @@ public class EmployeeController {
             File file = new File(uploadDirectory, picName);
             multipartFile.transferTo(file);
             employee.setPicName(picName);
-        }else {
+        } else {
             Optional<Employee> fromDB = employeeRepository.findById(employee.getId());
             employee.setPicName(fromDB.get().getPicName());
         }

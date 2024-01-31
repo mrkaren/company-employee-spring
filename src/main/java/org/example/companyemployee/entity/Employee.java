@@ -1,7 +1,6 @@
 package org.example.companyemployee.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 
 @Entity

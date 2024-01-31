@@ -3,12 +3,10 @@ package org.example.companyemployee.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Entity
-@Table(name = "company")
+@Table(name = "user")
 @Data
-public class Company {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +14,13 @@ public class Company {
 
     private String name;
 
-    private String address;
+    private String surname;
 
-    @OneToMany(mappedBy = "company")
-    private List<Employee> employeeList;
+    private String email;
 
-    @ManyToOne
-    private User user;
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+
 }

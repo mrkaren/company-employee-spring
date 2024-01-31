@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
+<th:block th:include="/fragment/headerFragment::userInfo" />
+
 Add Employee <br>
 <form method="post" action="/employees/add" enctype="multipart/form-data">
     Name: <input type="text" name="name"> <br>

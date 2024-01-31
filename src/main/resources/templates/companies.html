@@ -5,7 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-Companies page | <a href="/companies/add">Add Company</a>
+
+<th:block th:include="/fragment/headerFragment::userInfo" />
+
+Companies page | <a th:if="${currentUser != null && currentUser.userRole.name() == 'ADMIN'}" href="/companies/add">Add Company</a>
 <table>
     <thead>
     <tr>
@@ -13,6 +16,7 @@ Companies page | <a href="/companies/add">Add Company</a>
         <th>name</th>
         <th>address</th>
         <th>employees list</th>
+        <th>user name</th>
         <th>delete</th>
     </tr>
     </thead>
@@ -26,6 +30,10 @@ Companies page | <a href="/companies/add">Add Company</a>
                 <li th:each="employee: ${company.employeeList}" th:text="${employee.name}"></li>
             </ul>
         </td>
+        <td>
+            <span th:if="${company.user != null}" th:text="${company.user.name}"></span>
+        </td>
+
         <td><a th:href="@{'/companies/delete/' + ${company.id}}">Delete</a> </td>
     </tr>
 
