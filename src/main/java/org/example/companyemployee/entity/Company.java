@@ -2,7 +2,9 @@ package org.example.companyemployee.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,4 +25,13 @@ public class Company {
 
     @ManyToOne
     private User user;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date openedDate;
+
+    @ManyToMany
+    @JoinTable(name = "company_category",
+    joinColumns = @JoinColumn(name = "company_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories;
 }

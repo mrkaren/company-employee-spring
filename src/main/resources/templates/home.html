@@ -7,7 +7,7 @@
 </head>
 <body>
 <th:block th:include="/fragment/headerFragment::userInfo" />
-
+<a th:if="${currentUser == null}" href="/loginPage">Login</a> <br>
 <a href="/companies">Companies</a> | <a href="/employees"> Employees</a>
 <a href="/user/register">Registration</a>
 </body>

@@ -17,6 +17,8 @@ Companies page | <a th:if="${currentUser != null && currentUser.userRole.name() 
         <th>address</th>
         <th>employees list</th>
         <th>user name</th>
+        <th>opened Date</th>
+        <th>categories</th>
         <th>delete</th>
     </tr>
     </thead>
@@ -32,6 +34,12 @@ Companies page | <a th:if="${currentUser != null && currentUser.userRole.name() 
         </td>
         <td>
             <span th:if="${company.user != null}" th:text="${company.user.name}"></span>
+        </td>
+        <td>
+            <span th:text="${#dates.format(company.getOpenedDate(), 'dd-MMM-yyyy')}"> </span>
+        </td>
+        <td>
+            <span th:if="${company.getCategories() != null}" th:each="category: ${company.categories}" th:text="${category.name + ' '}"></span>
         </td>
 
         <td><a th:href="@{'/companies/delete/' + ${company.id}}">Delete</a> </td>

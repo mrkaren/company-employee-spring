@@ -1,5 +1,6 @@
 package org.example.companyemployee.config;
 
+import lombok.RequiredArgsConstructor;
 import org.example.companyemployee.entity.UserRole;
 import org.example.companyemployee.security.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,24 +14,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UserDetailService userDetailsService;
+    private final UserDetailService userDetailsService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/").permitAll()
                 .requestMatchers("/user/register").permitAll()
+                .requestMatchers("/loginPage").permitAll()
                 .requestMatchers("/companies/add").hasAuthority(UserRole.ADMIN.name())
                 .requestMatchers("/companies").hasAnyAuthority(UserRole.ADMIN.name(), UserRole.USER.name())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .loginPage("/loginPage")
+                .loginProcessingUrl("/login")
+//                .successForwardUrl("/loginSuccess")
+                .defaultSuccessUrl("/loginSuccess")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/");

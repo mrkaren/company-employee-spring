@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,6 +11,12 @@ Add Company <br>
 <form method="post" action="/companies/add">
     Name: <input type="text" name="name"> <br>
     Address: <input type="text" name="address"> <br>
+    Opened Date: <input type="date" name="openedDate" /><br>
+    Categories:
+    <div th:each="category, status: ${categories}">
+        <span th:text="${category.name}"></span>
+        <input type="checkbox" th:name="categories[__${status.index}__].id" th:value="${category.id}">
+    </div>
     <input type="submit" value="Add">
 </form>
 </body>
